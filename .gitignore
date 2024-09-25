@@ -12,3 +12,4 @@ AUTHORS
 *.nbc
 *.nbi
 */__pycache__/*
+pyproject.toml
