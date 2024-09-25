@@ -1,0 +1,14 @@
+LICENSE
+docs/
+*pyc
+AUTHORS
+*.xml
+*.STL
+*.stl
+*.dae
+*.obj
+*.mtl
+*.png
+*.nbc
+*.nbi
+*/__pycache__/*
