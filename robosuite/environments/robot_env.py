@@ -458,7 +458,7 @@ class RobotEnv(MujocoEnv):
 
         return sensors, names
 
-    def _create_segmentation_sensor(self, cam_name, cam_w, cam_h, cam_s, seg_name_root, modality="image"):
+    def _create_segmentation_sensor(self, cam_name, cam_w, cam_h, cam_s, seg_name_root, modality="image", custom_mapping=None):
         """
         Helper function to create sensors for a given camera. This is abstracted in a separate function call so that we
         don't have local function naming collisions during the _setup_observables() call.
@@ -483,15 +483,18 @@ class RobotEnv(MujocoEnv):
         # Make sure we get correct convention
         convention = IMAGE_CONVENTION_MAPPING[macros.IMAGE_CONVENTION]
 
-        if cam_s == "instance":
-            name2id = {inst: i for i, inst in enumerate(list(self.model.instances_to_ids.keys()))}
-            mapping = {idn: name2id[inst] for idn, inst in self.model.geom_ids_to_instances.items()}
-        elif cam_s == "class":
-            name2id = {cls: i for i, cls in enumerate(list(self.model.classes_to_ids.keys()))}
-            mapping = {idn: name2id[cls] for idn, cls in self.model.geom_ids_to_classes.items()}
-        else:  # element
-            # No additional mapping needed
-            mapping = None
+        if custom_mapping:
+            mapping = custom_mapping
+        else:
+            if cam_s == "instance":
+                name2id = {inst: i for i, inst in enumerate(list(self.model.instances_to_ids.keys()))}
+                mapping = {idn: name2id[inst] for idn, inst in self.model.geom_ids_to_instances.items()}
+            elif cam_s == "class":
+                name2id = {cls: i for i, cls in enumerate(list(self.model.classes_to_ids.keys()))}
+                mapping = {idn: name2id[cls] for idn, cls in self.model.geom_ids_to_classes.items()}
+            else:  # element
+                # No additional mapping needed
+                mapping = None
 
         @sensor(modality=modality)
         def camera_segmentation():
