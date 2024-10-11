@@ -101,6 +101,8 @@ class MjRenderContext:
 
         # options for visual / collision mesh can be set externally, e.g. vopt.geomgroup[0], vopt.geomgroup[1]
         self.vopt = mujoco.MjvOption()
+        # self.vopt.geomgroup[:] = 1
+        self.vopt.sitegroup[:] = 0
 
         self.pert = mujoco.MjvPerturb()
         self.pert.active = 0
