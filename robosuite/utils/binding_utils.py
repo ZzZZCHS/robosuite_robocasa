@@ -1099,8 +1099,15 @@ class MjSim:
 
     @classmethod
     def from_xml_string(cls, xml):
-        model = mujoco.MjModel.from_xml_string(xml)
-        return cls(model)
+        # model = mujoco.MjModel.from_xml_string(xml)
+        # return cls(model)
+        try:
+            model = mujoco.MjModel.from_xml_string(xml)
+            # print(xml)
+            return cls(model)
+        except Exception as e:
+            # breakpoint()
+            print(e)
 
     @classmethod
     def from_xml_file(cls, xml_file):
