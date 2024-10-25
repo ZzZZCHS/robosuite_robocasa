@@ -262,7 +262,7 @@ class MjSimState:
                 qvel = array[idx_qvel : idx_qvel + sim.model.nv]
         except Exception as e:
             print(e)
-            breakpoint()
+            # breakpoint()
         assert sim.model.na == 0
 
         return cls(time=time, qpos=qpos, qvel=qvel)
