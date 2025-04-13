@@ -13,3 +13,5 @@ AUTHORS
 *.nbi
 */__pycache__/*
 pyproject.toml
+
+robosuite.egg-info/
