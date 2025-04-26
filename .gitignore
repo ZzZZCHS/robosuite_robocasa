@@ -15,3 +15,5 @@ AUTHORS
 pyproject.toml
 
 robosuite.egg-info/
+
+assets/
